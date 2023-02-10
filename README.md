@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# Project 환경 설정
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## ES Lint, Prettier 설정
 
-## Available Scripts
+1. npm i -D eslint
+2. npm i -D --save-exact prettier
+   > --save-exact 는 정확한 버전을 설치하게 guide 해준다
+3. npm i -D eslint-config-prettier eslint-plugin-prettier
+   > eslint-config-prettier : eslint 와 prettier 과 겹치는 포맷을 비활성화
+   > eslint-plugin-prettier : eslint 에 prettier 포매팅 룰을 설정해준다
+4. npx eslint --init
+   > .eslintrc 파일이 생기며 초기화 해준다
+5. .eslintrc.json(혹은 js) 파일에 eslit-plugin-prettier extention을 추가해준다
 
-In the project directory, you can run:
+```js
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier']
 
-### `npm start`
+6. .eslintignore 파일을 만들어 준다
+   > 제외할 파일, 폴더를 설정한다(node_module, webpack.config, dist 등)
+7. .prettierrc.json 파일을 생성한다
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 문제점들
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### create-react-app 프로젝트 생성할 때 eslint 관련 오류들이 발생한다.
 
-### `npm test`
+1.  parsing error: unexpected token <
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    > babel-eslint 를 설치해 준다
+    > npm install babel-eslint --save-dev  
+    > .eslintrc.json 파일(혹은 js) 파일에 아래와 같이 "parser", "parserOptions" 를 구성하자
+    >
+    > ```js
+    > "parser": "@babel/eslint-parser",
+    > "parserOptions": {
+    >   "requireConfigFile": false,
+    >   "ecmaVersion": "latest",
+    >   "sourceType": "module",
+    >   "babelOptions": {
+    >   "presets": ["@babel/preset-react"]
+    > ```
 
-### `npm run build`
+2.  this experimental syntax requires enabling one of the following parser plugin(s) jsx flow typescript
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    > App.js 에 import 를 해야 한다
+    >
+    > ```js
+    > import React from "react";
+    > ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    > @babel/preset-react 를 설치하고 .eslintrc.json 파일에 babelOptions를 추가한다(config는 바로 위1번 참조)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    > npm install -D @babel/presert-react
