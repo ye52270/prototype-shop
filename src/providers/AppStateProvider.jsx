@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 
 const AppStateProvider = ({ children }) => {
-  const [prototypes] = useState([
+  const [prototypes, setPrototypes] = useState([
     {
       id: "pp-01",
       title: "Kids-story",
@@ -136,7 +136,7 @@ const AppStateProvider = ({ children }) => {
       pieUrl: "https://cloud.protopie.io/p/7a0d6567d2",
     },
   ]);
-  const [orders] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   // [{id, quantity:1, 2, 3...}]
 
