@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 
 const AppStateProvider = ({ children }) => {
-  const [prototypes, setPrototypes] = useState([
+  const [prototypes] = useState([
     {
       id: "pp-01",
       title: "Kids-story",
@@ -150,22 +150,29 @@ const AppStateProvider = ({ children }) => {
           if (order.id === id) {
             return {
               id,
-              quantity: order.qauantity + 1,
+              quantity: order.quantity + 1,
             };
+          } else {
+            console.log(order);
+            return order;
           }
         });
       }
     });
   }, []);
-  const removeToOrder = useCallback(() => {}, []);
-  const removeAll = useCallback(() => {}, []);
+  const remove = useCallback((id) => {
+    setOrders((orders) => orders.filter((order) => id !== order.id));
+  }, []);
+  const removeAll = useCallback(() => {
+    setOrders([]);
+  }, []);
   return (
     <AppStateContext.Provider
       value={{
         orders,
         prototypes,
         addToOrder,
-        removeToOrder,
+        remove,
         removeAll,
       }}
     >
