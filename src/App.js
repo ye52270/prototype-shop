@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "./components/Footer";
-import Orders from "./components/Orders";
+import OrdersContainer from "./container/OrdersContainer";
 import Header from "./components/Header";
 import Prototypes from "./components/Prototypes";
 import AppStateProvider from "./providers/AppStateProvider";
@@ -11,7 +11,7 @@ function App() {
       <Header />
       <div className="container">
         <Prototypes />
-        <Orders />
+        <OrdersContainer />
         <Footer />
       </div>
     </AppStateProvider>

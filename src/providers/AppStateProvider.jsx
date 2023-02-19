@@ -1,5 +1,5 @@
 import AppStateContext from "../contexts/AppStateContext";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 const AppStateProvider = ({ children }) => {
@@ -136,44 +136,44 @@ const AppStateProvider = ({ children }) => {
       pieUrl: "https://cloud.protopie.io/p/7a0d6567d2",
     },
   ]);
-  const [orders, setOrders] = useState([]);
+  // const [orders, setOrders] = useState([]);
 
   // [{id, quantity:1, 2, 3...}]
 
-  const addToOrder = useCallback((id) => {
-    setOrders((orders) => {
-      const finded = orders.find((order) => order.id === id);
-      if (finded === undefined) {
-        return [...orders, { id, quantity: 1 }];
-      } else {
-        return orders.map((order) => {
-          if (order.id === id) {
-            return {
-              id,
-              quantity: order.quantity + 1,
-            };
-          } else {
-            console.log(order);
-            return order;
-          }
-        });
-      }
-    });
-  }, []);
-  const remove = useCallback((id) => {
-    setOrders((orders) => orders.filter((order) => id !== order.id));
-  }, []);
-  const removeAll = useCallback(() => {
-    setOrders([]);
-  }, []);
+  // const addToOrder = useCallback((id) => {
+  //   setOrders((orders) => {
+  //     const finded = orders.find((order) => order.id === id);
+  //     if (finded === undefined) {
+  //       return [...orders, { id, quantity: 1 }];
+  //     } else {
+  //       return orders.map((order) => {
+  //         if (order.id === id) {
+  //           return {
+  //             id,
+  //             quantity: order.quantity + 1,
+  //           };
+  //         } else {
+  //           console.log(order);
+  //           return order;
+  //         }
+  //       });
+  //     }
+  //   });
+  // }, []);
+  // const remove = useCallback((id) => {
+  //   setOrders((orders) => orders.filter((order) => id !== order.id));
+  // }, []);
+  // const removeAll = useCallback(() => {
+  //   setOrders([]);
+  // }, []);
   return (
     <AppStateContext.Provider
       value={{
-        orders,
+        // orders,
         prototypes,
-        addToOrder,
-        remove,
-        removeAll,
+        // addToOrder,
+        // remove,
+        // removeAll,
       }}
     >
       {children}

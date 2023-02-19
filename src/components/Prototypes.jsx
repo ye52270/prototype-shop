@@ -1,10 +1,13 @@
 import React from "react";
-import useActions from "../hooks/useActions";
+import { useDispatch } from "react-redux";
+// import useActions from "../hooks/useActions";
 import usePrototypes from "../hooks/usePrototypes";
+import addToOrder from "../redux/action/orderAction";
 
 export default function Prototypes() {
   const prototypes = usePrototypes();
-  const { addToOrder } = useActions();
+  // const { addToOrder } = useActions();
+  const dispatch = useDispatch();
 
   return (
     <main>
@@ -12,7 +15,7 @@ export default function Prototypes() {
         {prototypes.map((prototype) => {
           const { id, title, thumbnail, pieUrl, price, desc } = prototype;
           const click = () => {
-            addToOrder(id);
+            dispatch(addToOrder(id));
           };
           return (
             <div className="prototype" key={id}>
