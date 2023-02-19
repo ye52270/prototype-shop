@@ -18,7 +18,12 @@ export function orders(state = [], action) {
   }
 
   if (action.type === REMOVE_ONE) {
-    return { ...state, id: action.id };
+    return state.filter((order) => {
+      if (order.id !== action.id) {
+        console.log(order.id);
+        return order;
+      }
+    });
   }
 
   if (action.type === REMOVE_ALL) {

@@ -1,9 +1,11 @@
 import React from "react";
-// import useActions from "../hooks/useActions";
 
-export default function Orders({ orders, prototypes, totalPrice }) {
-  // const { remove, removeAll } = useActions();
-
+export default function Orders({
+  orders,
+  prototypes,
+  totalPrice,
+  handdlerRemoveId,
+}) {
   return orders.length === 0 ? (
     <aside>
       <div className="empty">
@@ -18,9 +20,7 @@ export default function Orders({ orders, prototypes, totalPrice }) {
           {orders.map((order) => {
             const { id } = order;
             const prototype = prototypes.find((p) => p.id === id);
-            // const click = () => {
-            //   remove(id);
-            // };
+
             return (
               <div className="item" key={id}>
                 <div className="img">
@@ -33,8 +33,11 @@ export default function Orders({ orders, prototypes, totalPrice }) {
                 </div>
                 <div className="action">
                   <p className="price">$ {prototype.price * order.quantity}</p>
-                  {/* <button className="btn btn--link" onClick={click}> */}
-                  <button className="btn btn--link">
+
+                  <button
+                    className="btn btn--link"
+                    onClick={handdlerRemoveId.bind(this, id)}
+                  >
                     <i className="icon icon--cross" />
                   </button>
                 </div>

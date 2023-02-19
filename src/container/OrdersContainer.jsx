@@ -1,11 +1,13 @@
 import Orders from "../components/Orders";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import usePrototypes from "../hooks/usePrototypes";
 import { useMemo } from "react";
+import { remove } from "../redux/action/orderAction";
 
 export default function OrdersContainer() {
   const orders = useSelector((state) => state.orders);
+  const dispatch = useDispatch();
   const prototypes = usePrototypes();
   const totalPrice = useMemo(() => {
     return orders
@@ -16,8 +18,15 @@ export default function OrdersContainer() {
       })
       .reduce((acu, cur) => acu + cur, 0);
   }, [orders, prototypes]);
-
+  const handdlerRemoveId = (id) => {
+    dispatch(remove(id));
+  };
   return (
-    <Orders orders={orders} prototypes={prototypes} totalPrice={totalPrice} />
+    <Orders
+      orders={orders}
+      prototypes={prototypes}
+      totalPrice={totalPrice}
+      handdlerRemoveId={handdlerRemoveId}
+    />
   );
 }
