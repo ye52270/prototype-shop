@@ -27,7 +27,7 @@ export function orders(state = [], action) {
   }
 
   if (action.type === REMOVE_ALL) {
-    return { ...state, id: action.id };
+    return [];
   }
 
   return state;

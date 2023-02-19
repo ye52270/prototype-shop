@@ -5,6 +5,7 @@ export default function Orders({
   prototypes,
   totalPrice,
   handdlerRemoveId,
+  handdlerRemoveAll,
 }) {
   return orders.length === 0 ? (
     <aside>
@@ -52,9 +53,9 @@ export default function Orders({
             <div className="action">
               <div className="price">${totalPrice}</div>
             </div>
-            {/* <button className="btn btn--link" onClick={removeAll}>
+            <button className="btn btn--link" onClick={handdlerRemoveAll}>
               <i className="icon icon--delete"></i>
-            </button> */}
+            </button>
           </div>
           <button
             className="btn btn--secondary"

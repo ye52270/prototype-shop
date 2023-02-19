@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import usePrototypes from "../hooks/usePrototypes";
 import { useMemo } from "react";
-import { remove } from "../redux/action/orderAction";
+import { remove, removeAll } from "../redux/action/orderAction";
 
 export default function OrdersContainer() {
   const orders = useSelector((state) => state.orders);
@@ -21,12 +21,16 @@ export default function OrdersContainer() {
   const handdlerRemoveId = (id) => {
     dispatch(remove(id));
   };
+  const handdlerRemoveAll = () => {
+    dispatch(removeAll());
+  };
   return (
     <Orders
       orders={orders}
       prototypes={prototypes}
       totalPrice={totalPrice}
       handdlerRemoveId={handdlerRemoveId}
+      handdlerRemoveAll={handdlerRemoveAll}
     />
   );
 }

@@ -2,19 +2,17 @@ import React from "react";
 import Footer from "./components/Footer";
 import OrdersContainer from "./container/OrdersContainer";
 import Header from "./components/Header";
-import Prototypes from "./components/Prototypes";
-import AppStateProvider from "./providers/AppStateProvider";
+import PrototypesContainer from "./container/PrototypesContainer";
 
 function App() {
   return (
-    <AppStateProvider>
-      <Header />
+    <Header>
       <div className="container">
-        <Prototypes />
+        <PrototypesContainer />
         <OrdersContainer />
         <Footer />
       </div>
-    </AppStateProvider>
+    </Header>
   );
 }
 
