@@ -1,14 +1,19 @@
 import Orders from "../components/Orders";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import usePrototypes from "../hooks/usePrototypes";
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import { remove, removeAll } from "../redux/action/orderAction";
+import { getPrototypesThunk } from "../redux/action/prototypeAction";
 
 export default function OrdersContainer() {
   const orders = useSelector((state) => state.orders);
+  const prototypes = useSelector((state) => state.prototypes.prototypes);
   const dispatch = useDispatch();
-  const prototypes = usePrototypes();
+  // const prototypes = usePrototypes();
+  const getPrototypes = useCallback(() => {
+    dispatch(getPrototypesThunk());
+  }, [dispatch]);
+
   const totalPrice = useMemo(() => {
     return orders
       .map((order) => {
@@ -31,6 +36,7 @@ export default function OrdersContainer() {
       totalPrice={totalPrice}
       handdlerRemoveId={handdlerRemoveId}
       handdlerRemoveAll={handdlerRemoveAll}
+      getPrototypes={getPrototypes}
     />
   );
 }

@@ -6,13 +6,14 @@ import PrototypesContainer from "./container/PrototypesContainer";
 
 function App() {
   return (
-    <Header>
+    <>
+      <Header />
       <div className="container">
         <PrototypesContainer />
         <OrdersContainer />
         <Footer />
       </div>
-    </Header>
+    </>
   );
 }
 

@@ -4,16 +4,23 @@ import {
   FETCH_SUCCESS,
 } from "../action/prototypeAction";
 
-export function prototypes(state = [], action) {
+const initialState = {
+  loading: false,
+  prototypes: [],
+  error: null,
+};
+export function prototypes(state = initialState, action) {
   switch (action.type) {
     case FETCH_START:
       return {
+        ...state,
         loading: true,
+        error: null,
       };
     case FETCH_SUCCESS:
-      return { ...state, prototypes, loading: false, error: null };
+      return { ...state, loading: false, prototypes: action.prototypes };
     case FETCH_ERROR:
-      return { loading: false, error: action.error };
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }
